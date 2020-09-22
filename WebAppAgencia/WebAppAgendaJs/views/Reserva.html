@@ -1,0 +1,128 @@
+﻿<div class="container">
+    <!--<form name="frm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nome">Codigo do Consultor</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="cod" ng-model="cod" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 center-align">
+
+                <button ng-disabled="frm.$invalid"  ng-click="buscar()" class=" waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-search"></span> Buscar Inscrições</button>
+            </div>
+        </div>
+    </form>-->
+    
+    <form name="frm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="cliente">Cliente</label>
+            <div class="col-sm-10">
+                <input type="text" ng-keyup="buscaclientes(reserva.cliente)" class="form-control" name="cliente" ng-model="reserva.cliente.nome">
+
+                <div ng-repeat="usu in clientes">
+                    <div><a href="" ng-click="selectUsucliente(usu)">{{usu.nome}}</a></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="cliente">Agência</label>
+            <div class="col-sm-10">
+                <input type="text" ng-keyup="buscaagencias(reserva.agencia)" class="form-control" name="cliente" ng-model="reserva.agencia.nome">
+
+                <div ng-repeat="usu in agencias">
+                    <div><a href="" ng-click="selectUsugencia(usu)">{{usu.nome}}</a></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="cliente">Fornecedor</label>
+            <div class="col-sm-10">
+                <input type="text" ng-keyup="buscaafornecedors(reserva.fornecedor)" class="form-control" name="cliente" ng-model="reserva.fornecedor.nome">
+
+                <div ng-repeat="usu in fornecedors">
+                    <div><a href="" ng-click="selectUsufornecedor(usu)">{{usu.nome}}</a></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="noVoo">Número do Voo</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="noVoo" ng-model="reserva.noVoo" maxlength="30" required>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inicio">Inicio Reserva</label>
+            <div class="col-sm-10">
+                <input type="datetime-local" class="form-control" name="inicio" ng-model="reserva.inicio" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="fim">Fim Reserva</label>
+            <div class="col-sm-10">
+                <input type="datetime-local" class="form-control" name="fim" ng-model="reserva.fim" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="custo">Custo</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="custo" ng-model="reserva.custo" maxlength="30" ui-number-mask="2" ui-negative-number required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="comissao">Comissão</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="comissao" ng-model="reserva.comissao" maxlength="30" ui-number-mask="2" ui-negative-number required>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="origem">Origem</label>
+            <div class="col-sm-10">
+                <input type="text" ng-keyup="buscaorigem(reserva.origem)" class="form-control" name="origem" ng-model="reserva.origem.nome">
+
+                <div ng-repeat="origen in origens">
+                    <div><a href="" ng-click="selectorigen(origen)">{{origen.nome}}</a></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="origem">Destino</label>
+            <div class="col-sm-10">
+                <input type="text" ng-keyup="buscadestino(reserva.destino)" class="form-control" name="origem" ng-model="reserva.destino.nome">
+
+                <div ng-repeat="destino in destinos">
+                    <div><a href="" ng-click="selectdestino(destino)">{{destino.nome}}</a></div>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 center-align">
+
+                    <button ng-disabled="frm.$invalid" ng-click="salvar()" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-save"></span> Salvar</button>
+                    <button onclick="window.history.back();" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-backward"></span> Voltar</button>
+                    
+                </div>
+        </div>
+            <span class="small">Ultima Atualização: {{reserva.ultimaAtualizacao}}</span>
+</form>
+  
+  
+</div>

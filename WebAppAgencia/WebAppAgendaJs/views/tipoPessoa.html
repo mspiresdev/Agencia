@@ -1,0 +1,27 @@
+﻿<div class="container">
+    <form name="frm" class="form-horizontal">
+    
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nome">Nome</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="nome" ng-model="tipoPessoa.nome" maxlength="30" required>
+
+            </div>
+        </div>
+
+
+       
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 center-align">
+
+                <button ng-disabled="frm.$invalid" ng-click="salvar()" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-save"></span> Salvar</button>
+                <button onclick="window.history.back();" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-backward"></span> Voltar</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

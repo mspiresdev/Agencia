@@ -1,0 +1,41 @@
+﻿<div class="container">
+   <h2>{{}}</h2>
+   
+
+    <div class="form-group">
+     
+            <input type="text" placeholder="Pesquisar" ng-model="busca" class="form-control" />
+
+    </div>
+    <br />
+    <table class="table table-bordered" ng-show="itinerarios.length">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>descrição</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            <tr dir-paginate="itinerario in itinerarios | filter: busca | itemsPerPage:5" ng-show="itinerarios.length">
+                <td>{{itinerario.nome}}</td>
+                <td>{{itinerario.descricao}}</td>
+              
+                <td><a href="#/itinerario/{{itinerario.id}}" class="waves-effect waves-ligh btn btn-horizontal left btn-lg">
+                        <span class="glyphicon glyphicon-save"></span> Editar
+                    </a>
+                </td>
+                <td>
+                    <button  class="btn btn-default" ng-click="del(itinerario)" data-placement="top" data-original-title="Remover Inscrição"><span class="glyphicon glyphicon-remove-sign"></span></button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="#/itinerario/0"><button type="button" class="btn btn-secondary btn-lg btn-block">Incluir Itinerário</button></a> 
+    <div class="text-center" ng-if="itinerarios.length > 0">
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" auto-hide="true"></dir-pagination-controls>
+    </div>
+    <div ng-show="!itinerarios.length">A pesquisa não encontrou resultado.</div>
+</div>

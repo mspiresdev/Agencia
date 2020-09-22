@@ -1,0 +1,149 @@
+﻿<div class="container">
+    <!--<form name="frm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nome">Codigo do Consultor</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="cod" ng-model="cod" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 center-align">
+
+                <button ng-disabled="frm.$invalid"  ng-click="buscar()" class=" waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-search"></span> Buscar Inscrições</button>
+            </div>
+        </div>
+    </form>-->
+   
+    <form name="frm" class="form-horizontal">
+    
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="tipo">Tipo</label>
+            <div class="col-sm-10">
+                <select ng-disabled="pessoa.id !== 0" ng-change="settipoPessoa()" class="selectpicker form-control" name="tipo" ng-model="tipoPessoa" ng-options="tipo.nome for tipo in tipos track by tipo.id" required>
+                    
+                </select>
+                
+             </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="juridica">Fisica</label>
+             <div class="col-sm-10">
+                  <input ng-disabled="pessoa.id !== 0" type="radio" class="form-control" value="0" name="juridica" ng-model="pessoa.juridica">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+             <label class="control-label col-sm-2" for="juridica">Jurídica</label>
+            <div class="col-sm-10">
+                <input ng-disabled="pessoa.id !== 0" type="radio" class="form-control" value="1" name="juridica" ng-model="pessoa.juridica">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nome">Nome</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="nome" ng-model="pessoa.nome" maxlength="30" required>
+
+            </div>
+        </div>
+
+        <div ng-if="pessoa.juridica == 0" class="form-group">
+            <label class="control-label col-sm-2" for="cpf">CPF</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="cpf" ng-model="pessoa.cpf" maxlength="14" ui-cpf required>
+                <div ng-show="frm.cpf.$invalid">CPF inválido</div>
+            </div>
+        </div>
+
+        <div ng-if="pessoa.juridica == 1" class="form-group">
+            <label class="control-label col-sm-2" for="cnpj">CNPJ</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="cnpj" ng-model="pessoa.cnpj" maxlength="19" ui-cnpj required>
+                <div ng-show="frm.cnpj.$invalid">CNPJ inválido</div>
+            </div>
+        </div>
+        <div  class="form-group">
+            <label class="control-label col-sm-2" for="contatos">Contatos</label> 
+            <div class="col-sm-10">
+                <button class="btn btn-default" ng-click="add(pessoa.contatos)" data-placement="top" data-original-title="Adicionar contato"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                <div ng-repeat="contato in pessoa.contatos | filter: {visivel: true}" class="mdi-border">
+                    
+                    <input type="text"placeholder="Número" class="form-control" style="width:30%; float:left" name="nome" ng-model="contato.numero" maxlength="30" required>
+                    <input type="text" placeholder="Tipo de Contato" class="form-control" style="width:30%; float:left" name="nome" ng-model="contato.tipo" maxlength="30" required>
+                    <input type="text" placeholder="Descricao" class="form-control" style="width:30%; float:left" name="nome" ng-model="contato.descricao" maxlength="30" required>
+                    <button class="btn btn-default" ng-click="del(contato, pessoa.contatos)" data-placement="top" data-original-title="Remover contato"><span class="glyphicon glyphicon-remove-sign"></span></button>
+
+                </div>
+            </div>
+         </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="enderecos">Endereços</label>
+            <div class="col-sm-10">
+                <button class="btn btn-default" ng-click="add(pessoa.enderecos)" data-placement="top" data-original-title="Adicionar contato"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                <div ng-repeat="endereco in pessoa.enderecos | filter: {visivel: true}" class="mdi-border">
+
+                    <input type="text" placeholder="Logradouro" class="form-control" style="width:30%; float:left" name="nome" ng-model="endereco.logradouro" maxlength="30" required>
+                    <input type="text" placeholder="Número" class="form-control" style="width:10%; float:left" name="nome" ng-model="endereco.numero" maxlength="30" required>
+                    <input type="text" placeholder="Compl" class="form-control" style="width:10%; float:left" name="nome" ng-model="endereco.complemento" maxlength="30" >
+                    <input type="text" placeholder="CEP" class="form-control" style="width:10%; float:left" name="nome" ng-model="endereco.cep" maxlength="30" >
+                    <button class="btn btn-default" ng-click="del(endereco, pessoa.enderecos)" data-placement="top" data-original-title="Remover contato"><span class="glyphicon glyphicon-remove-sign"></span></button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="veiculos">Veículos</label>
+            <div class="col-sm-10">
+                <button class="btn btn-default" ng-click="add(pessoa.veiculos)" data-placement="top" data-original-title="Adicionar contato"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                <div ng-repeat="veiculo in pessoa.veiculos | filter: {visivel: true}" class="mdi-border">
+
+                    <input type="text" placeholder="Placa" class="form-control" style="width:10%; float:left" name="nome" ng-model="veiculo.placa" maxlength="30" required>
+                    <input type="text" placeholder="Modelo" class="form-control" style="width:10%; float:left" name="nome" ng-model="veiculo.modelo" maxlength="30" >
+                    <input type="text" placeholder="Obs" class="form-control" style="width:30%; float:left" name="nome" ng-model="veiculo.obs" maxlength="30">
+                    <input type="number" placeholder="Assentos" class="form-control" style="width:10%; float:left" name="nome" ng-model="veiculo.assentos" maxlength="30">
+                    <button class="btn btn-default" ng-click="del(veiculo,pessoa.veiculos)" data-placement="top" data-original-title="Remover contato"><span class="glyphicon glyphicon-remove-sign"></span></button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="usu">Usuario</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="usu" ng-model="pessoa.usuario.usu" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="senha">Senha</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="senha" ng-model="pessoa.usuario.senha" maxlength="30" required>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="confimasenha">Confirmação de Senha</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="confimasenha" ng-model="confimasenha" maxlength="30" required>
+
+            </div>
+        </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 center-align">
+
+                    <button ng-disabled="frm.$invalid" ng-click="salvar()" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-save"></span> Salvar</button>
+                    <button onclick="window.history.back();" class="waves-effect waves-ligh btn btn-horizontal left btn-lg"><span class="glyphicon glyphicon-backward"></span> Voltar</button>
+                    
+                </div>
+            </div>
+            <span class="small">Ultima Atualização: {{pessoa.ultimaAtualizacao}}</span>
+</form>
+  
+  
+</div>
